@@ -1,20 +1,20 @@
 class FieldElement:
     def __init__(self, num, prime):
-        if num >= prime or num < 0:
+        if num >= prime or num < 0: #check if number is between 0 and num -1 inclusive
             error = "Num {} nu e bun trb doar intre 0 si {}".format(num, prime-1)
-            raise ValueError(error)
-        self.num = num
-        self.prime = prime
+            raise ValueError(error) #it's not thus raise ValuError()
+        self.num = num #otherwise just assign for the current object the value (input) and the prime
+        self.prime = prime #over which we defined our field
 
     def __repr__(self):
         return "Field element_{}({})".format(self.num, self.prime)
 
-    def __eq__(self, other):
+    def __eq__(self, other):    #overloading of == operator , checks if two FieldElement objects are equal
         if other is None:
             return False
-        return self.num == other.num and self.prime == other.prime
+        return self.num == other.num and self.prime == other.prime  #check attributes
 
-    def __ne__(self, other):
+    def __ne__(self, other):    #overloading for !=
         if other is None:
             return False
         return self.num != other.num and self.prime == other.prime
@@ -42,18 +42,18 @@ class FieldElement:
         return self.__class__(num, self.prime)
 
     def __pow__(self, exp):
-        n = exp % (self.prime - 1)
-        num = pow(self.num, n, self.prime)
+        n = exp % (self.prime - 1)  #force the exponent back in our field
+        num = pow(self.num, n, self.prime)  #use modulo self.prime (3rd argument) to reduce here as well
         return self.__class__(num, self.prime)
 
-    def __truediv__(self, other):
-        if  other.prime != self.prime:
+    def __truediv__(self, other): #inverse of multiplication
+        if  other.prime != self.prime: #i can't operate in diffrent fields !
             error = "brush"
             raise TypeError(error)
         num = self.num*pow(other.num, self.prime-2, self.prime) % self.prime
         return self.__class__(num, self.prime)
 
-    def __rmul__(self, coefficient):
+    def __rmul__(self, coefficient): #for negative exponents!
         num = (self.num * coefficient) % self.prime
         return self.__class__(num, self.prime)
 """
