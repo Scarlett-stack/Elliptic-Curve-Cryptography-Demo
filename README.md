@@ -1,5 +1,5 @@
 # Elliptic-Curve-Cryptography-Demo
-Python code for checking Point Addition, Scalar Multiplication and Division
+Python code for checking Point Addition, Scalar Multiplication and Division <br>
 Testing module (don't rely on it though) : ECCTest.py
 How tp run? Note that if you run it like this you don't need to import the FieldElement class
 ```
